@@ -1,6 +1,8 @@
+from os import link
 from unicodedata import name
 import scrapy
 import json
+#from scrapy.linkextractors import LinkExtractor
 
 class ESPNScoresSpider(scrapy.Spider):
     name = 'espnscores'
@@ -15,28 +17,6 @@ class ESPNScoresSpider(scrapy.Spider):
             "/seasontype/2")
 
     start_urls=urls_year
-
-    '''
-    start_urls = [  'https://www.espn.com/nfl/scoreboard/_/week/1/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/2/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/3/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/4/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/5/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/6/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/7/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/8/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/9/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/10/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/11/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/12/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/13/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/14/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/15/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/16/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/17/year/2021/seasontype/2',
-                    'https://www.espn.com/nfl/scoreboard/_/week/18/year/2021/seasontype/2'
-                    ]
-                    '''
 
     def parse(self, response):
         '''
