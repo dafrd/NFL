@@ -19,11 +19,30 @@ class ESPNGamesDetailSpider(scrapy.Spider):
     def parse(self, response):
         #game = response.meta['game']
         #game['game_detail'] = []
+
+        split = response.url.split("/")
+
         for game in response.css('#gamepackage-box-score'):
-            
-            yield{
-                "away" : response.css('span.abbrev::text').get(),
-                "qb": game.css('span.abbr::text').get()
-            }
+            for awayteam in game.css('div.col.column-one.gamepackage-away-wrap'):
+                for player in awayteam.css('td.name'):
+                    player_name = player.css('span.abbr::text').get()
+                    if player_name is not None:
+                        yield{
+                            "game_id" : split[7],
+                            "team" : response.css('span.abbrev::text').get(),
+                            "player_name" : player.css('td.name > a > span::text').get(),
+                            "player_url" : player.css('td.name > a::attr(href)').get()
+                        }
+                
+            for hometeam in game.css('div.col.column-two.gamepackage-away-wrap'):
+                for player in awayteam.css('td.name'):
+                    player_name = player.css('span.abbr::text').get()
+                    if player_name is not None:
+                        yield{
+                            "game_id" : split[7],
+                            "team" : response.css('span.abbrev::text').extract()[1],
+                            "player_name" : player.css('td.name > a > span::text').get(),
+                            "player_url" : player.css('td.name > a::attr(href)').get()
+                        }
     
                 
