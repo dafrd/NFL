@@ -1,5 +1,5 @@
-from os import link
-from unicodedata import name
+#from os import link
+#from unicodedata import name
 import scrapy
 import json
 #from scrapy.linkextractors import LinkExtractor
@@ -30,16 +30,22 @@ class ESPNScoresSpider(scrapy.Spider):
                 #yield {"productName":product["productName"]} # data from css:  a.shelf-product-name
                 yield product
         '''
+        split = response.url.split("/")
+        print(split)
 
         for scores in response.css('section.Scoreboard.bg-clr-white.flex.flex-auto.justify-between'):
             #try:
+            
                 yield{
-                    'week': response.css('div.custom--week.is-active > span.week.week-range::text').get(),
+                    #'week': response.css('div.custom--week.is-active > span.week.week-range::text').get(),
+                    'season' : split[9],
+                    'week' : split[7],
                     'awayteam': scores.css('div.ScoreCell__TeamName.ScoreCell__TeamName--shortDisplayName.truncate.db::text').get(),
                     'hometeam': scores.css('div.ScoreCell__TeamName.ScoreCell__TeamName--shortDisplayName.truncate.db::text').extract()[1],
                     'awayscore' : scores.css('div.ScoreCell__Score.h4.clr-gray-01.fw-heavy.tar.ScoreCell_Score--scoreboard.pl2::text').get(),
                     'homescore': scores.css('div.ScoreCell__Score.h4.clr-gray-01.fw-heavy.tar.ScoreCell_Score--scoreboard.pl2::text').extract()[1],
-                    'gamedetail' : scores.css('a.AnchorLink.Button.Button--sm.Button--anchorLink.Button--alt.mb4.w-100.mr2').attrib['href']
+                    #'gamedetail' : str('http://espn.com/')+scores.css('a.AnchorLink.Button.Button--sm.Button--anchorLink.Button--alt.mb4.w-100.mr2').extract()[1].attrib['href']
+                    'boxscore' : str('https://espn.com')+scores.css('a.AnchorLink.Button.Button--sm.Button--anchorLink.Button--alt.mb4.w-100.mr2::attr(href)').extract()[1]
                 }
             #except:
         #return super().parse(response, **kwargs)
