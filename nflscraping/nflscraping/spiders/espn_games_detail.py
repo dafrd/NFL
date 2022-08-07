@@ -31,7 +31,8 @@ class ESPNGamesDetailSpider(scrapy.Spider):
                             "game_id" : split[7],
                             "team" : response.css('span.abbrev::text').get(),
                             "player_name" : player.css('td.name > a > span::text').get(),
-                            "player_url" : player.css('td.name > a::attr(href)').get()
+                            "player_url" : player.css('td.name > a::attr(href)').get(),
+                            #"CMP" : hometeam.css('td.c-att::text').get()
                         }
                 
             for hometeam in game.css('div.col.column-two.gamepackage-away-wrap'):
@@ -42,7 +43,8 @@ class ESPNGamesDetailSpider(scrapy.Spider):
                             "game_id" : split[7],
                             "team" : response.css('span.abbrev::text').extract()[1],
                             "player_name" : player.css('td.name > a > span::text').get(),
-                            "player_url" : player.css('td.name > a::attr(href)').get()
+                            "player_url" : player.css('td.name > a::attr(href)').get(),
+                            #"CMP" : awayteam.css('td.c-att::text').get()
                         }
     
                 
