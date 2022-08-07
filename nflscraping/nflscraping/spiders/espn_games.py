@@ -31,7 +31,7 @@ class ESPNScoresSpider(scrapy.Spider):
                 yield product
         '''
         split = response.url.split("/")
-        print(split)
+        #print(split)
 
         for scores in response.css('section.Scoreboard.bg-clr-white.flex.flex-auto.justify-between'):
             #try:

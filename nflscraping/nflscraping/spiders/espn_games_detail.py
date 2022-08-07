@@ -19,7 +19,8 @@ class ESPNGamesDetailSpider(scrapy.Spider):
     def parse(self, response):
         #game = response.meta['game']
         #game['game_detail'] = []
-        for game in response.css('#gamepackage-wrap'):
+        for game in response.css('#gamepackage-box-score'):
+            
             yield{
                 "away" : response.css('span.abbrev::text').get(),
                 "qb": game.css('span.abbr::text').get()
