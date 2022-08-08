@@ -29,19 +29,20 @@ class ESPNGamesDetailSpider(scrapy.Spider):
                     if player_name is not None:
                         yield{
                             "game_id" : split[7],
-                            "team" : response.css('span.abbrev::text').get(),
+                            "team" : response.css('span.team-name::text').get(),
                             "player_name" : player.css('td.name > a > span::text').get(),
                             "player_url" : player.css('td.name > a::attr(href)').get(),
                             "pass completion" : awayteam.css('td.c-att::text').get(),
                             "pass yds" : awayteam.css('td.yds::text').get(),
-                            "avg" : awayteam.css('td.avg::text').get(),
-                            "td" : awayteam.css('td.td::text').get(),
-                            "int" : awayteam.css('td.int::text').get(),
+                            "pass avg" : awayteam.css('td.avg::text').get(),
+                            "pass td" : awayteam.css('td.td::text').get(),
+                            "pass int" : awayteam.css('td.int::text').get(),
                             "sacks" : awayteam.css('td.sacks::text').get(),
                             "qbr" : awayteam.css('td.qbr::text').get(),
                             "rtg" : awayteam.css('td.rtg::text').get(),
-                            "car" : awayteam.css('td.car::text').get(),
-                            "long" : awayteam.css('td.long::text').get()
+                            "rush car" : awayteam.css('td.car::text').get(),
+                            "rush yds" : awayteam.css('td.')
+                            "rush long" : awayteam.css('td.long::text').get()
 
                         }
                 
@@ -51,7 +52,7 @@ class ESPNGamesDetailSpider(scrapy.Spider):
                     if player_name is not None:
                         yield{
                             "game_id" : split[7],
-                            "team" : response.css('span.abbrev::text').extract()[1],
+                            "team" : response.css('span.team-name::text').extract()[1],
                             "player_name" : player.css('td.name > a > span::text').get(),
                             "player_url" : player.css('td.name > a::attr(href)').get(),
                             "pass completion" : hometeam.css('td.c-att::text').get(),
