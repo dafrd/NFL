@@ -41,7 +41,7 @@ class ESPNGamesDetailSpider(scrapy.Spider):
                             "qbr" : awayteam.css('td.qbr::text').get(),
                             "rtg" : awayteam.css('td.rtg::text').get(),
                             "rush car" : awayteam.css('td.car::text').get(),
-                            "rush yds" : awayteam.css('td.')
+                            "rush yds" : awayteam.css('td.yds::text').get(),
                             "rush long" : awayteam.css('td.long::text').get()
 
                         }
