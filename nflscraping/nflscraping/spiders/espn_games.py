@@ -9,7 +9,7 @@ class ESPNScoresSpider(scrapy.Spider):
 
     urls_year=[]
     for week in range(1,19):
-        for year in range(2012,2022,1):
+        for year in range(2017,2022,1):
             urls_year.append("https://www.espn.com/nfl/scoreboard/_/week/" + 
             str(week) + 
             "/year/" +

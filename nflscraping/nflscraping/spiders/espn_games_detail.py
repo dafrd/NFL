@@ -8,7 +8,7 @@ class ESPNGamesDetailSpider(scrapy.Spider):
     name = 'espngamesdetail'
 
     def __init__(self):
-        with open('espn_scores.json', encoding='utf-8') as data_file:
+        with open('../json/espn_scores.json', encoding='utf-8') as data_file:
             self.data = json.load(data_file)
 
     def start_requests(self):
@@ -118,7 +118,7 @@ class ESPNGamesDetailSpider(scrapy.Spider):
             #if player_abbr is not None:
             yield{
                     "game_id" : split[7],
-                    "team" : response.css('span.team-name::text').get(),
+                    "team" : response.css('span.team-name::text').extract()[1],
                     "player_name" : response.xpath('//span[text()="'+player+'"]/text()').get(),
                     "player_url" : response.xpath('//span[text()="'+player+'"]/ancestor::a/@href').get(),
                     "pass completion" : response.xpath('//*[@id="gamepackage-passing"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="c-att"]/text()').get(),
