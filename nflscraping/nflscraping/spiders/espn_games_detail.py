@@ -39,12 +39,12 @@ class ESPNGamesDetailSpider(scrapy.Spider):
                     if player_name is not None:
                         home.append(player.css('td.name > a > span::text').get())
                     home = list(set(home))
-        
+        '''
         yield{
             "game_id" : split[7],
             "away roster" : away,
             "home roster" : home,
-            }
+            }'''
 
         for player in away:
             #for player in response.css('tr:contains("'+name+'")'):
