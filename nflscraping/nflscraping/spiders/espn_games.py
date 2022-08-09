@@ -35,7 +35,7 @@ class ESPNScoresSpider(scrapy.Spider):
 
         for scores in response.css('section.Scoreboard.bg-clr-white.flex.flex-auto.justify-between'):
             #try:
-            
+                idgame = scores.css('section.Scoreboard.bg-clr-white.flex.flex-auto.justify-between::attr(id)').get()
                 yield{
                     #'week': response.css('div.custom--week.is-active > span.week.week-range::text').get(),
                     'season' : split[9],
@@ -46,7 +46,11 @@ class ESPNScoresSpider(scrapy.Spider):
                     'homescore': scores.css('div.ScoreCell__Score.h4.clr-gray-01.fw-heavy.tar.ScoreCell_Score--scoreboard.pl2::text').extract()[1],
                     'gamecast' : str('https://espn.com')+scores.css('a.AnchorLink.Button.Button--sm.Button--anchorLink.Button--alt.mb4.w-100.mr2::attr(href)').extract()[0],
                     'boxscore' : str('https://espn.com')+scores.css('a.AnchorLink.Button.Button--sm.Button--anchorLink.Button--alt.mb4.w-100.mr2::attr(href)').extract()[1],
-                    'idgame' : scores.css('section.Scoreboard.bg-clr-white.flex.flex-auto.justify-between::attr(id)').get()
+                    'idgame' : scores.css('section.Scoreboard.bg-clr-white.flex.flex-auto.justify-between::attr(id)').get(),
+                    'awayteam global record' : scores.css('span.ScoreboardScoreCell__Record::text').get(),
+                    'awayteam away record' : scores.css('span.ScoreboardScoreCell__Record::text').extract()[1],
+                    'hometeam global record' : scores.xpath('//*[@id="'+idgame+'"]/div[1]/div/div[1]/div/div/ul/li[2]/div[1]/div[2]/span[1]/text()').get(),
+                    'hometeam home record' : scores.xpath('//*[@id="'+idgame+'"]/div[1]/div/div[1]/div/div/ul/li[2]/div[1]/div[2]/span[2]/text()').get()
                 }
             #except:
         #return super().parse(response, **kwargs)
