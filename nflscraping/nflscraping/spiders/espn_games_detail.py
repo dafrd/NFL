@@ -8,7 +8,7 @@ class ESPNGamesDetailSpider(scrapy.Spider):
     name = 'espngamesdetail'
 
     def __init__(self):
-        with open('espn_scores.json', encoding='utf-8') as data_file:
+        with open('../json/espn_scores.json', encoding='utf-8') as data_file:
             self.data = json.load(data_file)
 
     def start_requests(self):
@@ -77,8 +77,39 @@ class ESPNGamesDetailSpider(scrapy.Spider):
                     "rec tgs" : response.xpath('//*[@id="gamepackage-receiving"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="tgts"]/text()').get(),
                     "fumbles" : response.xpath('//*[@id="gamepackage-fumbles"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="fum"]/text()').get(),
                     "fumbles lost" : response.xpath('//*[@id="gamepackage-fumbles"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="lost"]/text()').get(),
-                    "fumbles rec" : response.xpath('//*[@id="gamepackage-fumbles"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="rec"]/text()').get()          
-        }
+                    "fumbles rec" : response.xpath('//*[@id="gamepackage-fumbles"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="rec"]/text()').get(),
+                    "defense tot" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="tot"]/text()').get(),
+                    "defense solo" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="solo"]/text()').get(),
+                    "defense sacks" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="sacks"]/text()').get(),
+                    "defense tfl" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="tfl"]/text()').get(),
+                    "defense pd" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="pd"]/text()').get(),
+                    "defense qb hits" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="qb hts"]/text()').get(),
+                    "defense td" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="td"]/text()').get(),
+                    "interceptions" : response.xpath('//*[@id="gamepackage-interceptions"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="int"]/text()').get(),
+                    "interceptions yds" : response.xpath('//*[@id="gamepackage-interceptions"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="yds"]/text()').get(),
+                    "interceptions td" : response.xpath('//*[@id="gamepackage-interceptions"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="td"]/text()').get(),
+                    "kicks return no" : response.xpath('//*[@id="gamepackage-kickReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="no"]/text()').get(),
+                    "kicks return yds" : response.xpath('//*[@id="gamepackage-kickReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="yds"]/text()').get(),
+                    "kicks return avg" : response.xpath('//*[@id="gamepackage-kickReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="avg"]/text()').get(),
+                    "kicks return long" : response.xpath('//*[@id="gamepackage-kickReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="long"]/text()').get(),
+                    "kicks return td" : response.xpath('//*[@id="gamepackage-kickReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="td"]/text()').get(),
+                    "punt return no" : response.xpath('//*[@id="gamepackage-puntReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="no"]/text()').get(),
+                    "punt return yds" : response.xpath('//*[@id="gamepackage-puntReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="yds"]/text()').get(),
+                    "punt return avg" : response.xpath('//*[@id="gamepackage-puntReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="avg"]/text()').get(),
+                    "punt return long" : response.xpath('//*[@id="gamepackage-puntReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="long"]/text()').get(),               
+                    "punt return td" : response.xpath('//*[@id="gamepackage-puntReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="td"]/text()').get(),
+                    "kicking fg" : response.xpath('//*[@id="gamepackage-kicking"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="fg"]/text()').get(),
+                    "kicking pct" : response.xpath('//*[@id="gamepackage-kicking"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="pct"]/text()').get(),                
+                    "kicking long" : response.xpath('//*[@id="gamepackage-kicking"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="long"]/text()').get(),
+                    "kicking xp" : response.xpath('//*[@id="gamepackage-kicking"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="xp"]/text()').get(),
+                    "kicking pts" : response.xpath('//*[@id="gamepackage-kicking"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="pts"]/text()').get(),
+                    "punting no" : response.xpath('//*[@id="gamepackage-punting"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="no"]/text()').get(),
+                    "punting yds" : response.xpath('//*[@id="gamepackage-punting"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="yds"]/text()').get(),
+                    "punting avg" : response.xpath('//*[@id="gamepackage-punting"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="avg"]/text()').get(),
+                    "punting tb" : response.xpath('//*[@id="gamepackage-punting"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="tb"]/text()').get(),
+                    "punting in 20" : response.xpath('//*[@id="gamepackage-punting"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="in 20"]/text()').get(),
+                    "punting long" : response.xpath('//*[@id="gamepackage-punting"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="long"]/text()').get()
+                }   
 
         for player in home:
             #for player in response.css('tr:contains("'+name+'")'):
@@ -87,7 +118,7 @@ class ESPNGamesDetailSpider(scrapy.Spider):
             #if player_abbr is not None:
             yield{
                     "game_id" : split[7],
-                    "team" : response.css('span.team-name::text').get(),
+                    "team" : response.css('span.team-name::text').extract()[1],
                     "player_name" : response.xpath('//span[text()="'+player+'"]/text()').get(),
                     "player_url" : response.xpath('//span[text()="'+player+'"]/ancestor::a/@href').get(),
                     "pass completion" : response.xpath('//*[@id="gamepackage-passing"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="c-att"]/text()').get(),
@@ -111,52 +142,37 @@ class ESPNGamesDetailSpider(scrapy.Spider):
                     "rec tgs" : response.xpath('//*[@id="gamepackage-receiving"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="tgts"]/text()').get(),
                     "fumbles" : response.xpath('//*[@id="gamepackage-fumbles"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="fum"]/text()').get(),
                     "fumbles lost" : response.xpath('//*[@id="gamepackage-fumbles"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="lost"]/text()').get(),
-                    "fumbles rec" : response.xpath('//*[@id="gamepackage-fumbles"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="rec"]/text()').get()          
+                    "fumbles rec" : response.xpath('//*[@id="gamepackage-fumbles"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="rec"]/text()').get(),
+                    "defense tot" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="tot"]/text()').get(),
+                    "defense solo" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="solo"]/text()').get(),
+                    "defense sacks" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="sacks"]/text()').get(),
+                    "defense tfl" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="tfl"]/text()').get(),
+                    "defense pd" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="pd"]/text()').get(),
+                    "defense qb hits" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="qb hts"]/text()').get(),
+                    "defense td" : response.xpath('//*[@id="gamepackage-defensive"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="td"]/text()').get(),
+                    "interceptions" : response.xpath('//*[@id="gamepackage-interceptions"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="int"]/text()').get(),
+                    "interceptions yds" : response.xpath('//*[@id="gamepackage-interceptions"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="yds"]/text()').get(),
+                    "interceptions td" : response.xpath('//*[@id="gamepackage-interceptions"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="td"]/text()').get(),
+                    "kicks return no" : response.xpath('//*[@id="gamepackage-kickReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="no"]/text()').get(),
+                    "kicks return yds" : response.xpath('//*[@id="gamepackage-kickReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="yds"]/text()').get(),
+                    "kicks return avg" : response.xpath('//*[@id="gamepackage-kickReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="avg"]/text()').get(),
+                    "kicks return long" : response.xpath('//*[@id="gamepackage-kickReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="long"]/text()').get(),
+                    "kicks return td" : response.xpath('//*[@id="gamepackage-kickReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="td"]/text()').get(),
+                    "punt return no" : response.xpath('//*[@id="gamepackage-puntReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="no"]/text()').get(),
+                    "punt return yds" : response.xpath('//*[@id="gamepackage-puntReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="yds"]/text()').get(),
+                    "punt return avg" : response.xpath('//*[@id="gamepackage-puntReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="avg"]/text()').get(),
+                    "punt return long" : response.xpath('//*[@id="gamepackage-puntReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="long"]/text()').get(),               
+                    "punt return td" : response.xpath('//*[@id="gamepackage-puntReturns"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="td"]/text()').get(),
+                    "kicking fg" : response.xpath('//*[@id="gamepackage-kicking"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="fg"]/text()').get(),
+                    "kicking pct" : response.xpath('//*[@id="gamepackage-kicking"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="pct"]/text()').get(),                
+                    "kicking long" : response.xpath('//*[@id="gamepackage-kicking"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="long"]/text()').get(),
+                    "kicking xp" : response.xpath('//*[@id="gamepackage-kicking"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="xp"]/text()').get(),
+                    "kicking pts" : response.xpath('//*[@id="gamepackage-kicking"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="pts"]/text()').get(),
+                    "punting no" : response.xpath('//*[@id="gamepackage-punting"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="no"]/text()').get(),
+                    "punting yds" : response.xpath('//*[@id="gamepackage-punting"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="yds"]/text()').get(),
+                    "punting avg" : response.xpath('//*[@id="gamepackage-punting"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="avg"]/text()').get(),
+                    "punting tb" : response.xpath('//*[@id="gamepackage-punting"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="tb"]/text()').get(),
+                    "punting in 20" : response.xpath('//*[@id="gamepackage-punting"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="in 20"]/text()').get(),
+                    "punting long" : response.xpath('//*[@id="gamepackage-punting"]/div/div[1]/div/div/table/tbody/tr/td/a/span[text()="'+player+'"]/../../../td[@class="long"]/text()').get()       
+       
         }
-
-            '''
-            for game in response.css('#gamepackage-box-score'):
-                for awayteam in game.css('div.col.column-one.gamepackage-away-wrap'):
-                    for player in awayteam.css('td.name'):
-                        player_name = player.css('span.abbr::text').get()
-                        if player_name is not None:
-                            yield{
-                                "game_id" : split[7],
-                                "team" : response.css('span.team-name::text').get(),
-                                "player_name" : player.css('td.name > a > span::text').get(),
-                                "player_url" : player.css('td.name > a::attr(href)').get(),
-                                "pass completion" : awayteam.css('td.c-att::text').get(),
-                                "pass yds" : awayteam.css('td.yds::text').get(),
-                                "pass avg" : awayteam.css('td.avg::text').get(),
-                                "pass td" : awayteam.css('td.td::text').get(),
-                                "pass int" : awayteam.css('td.int::text').get(),
-                                "sacks" : awayteam.css('td.sacks::text').get(),
-                                "qbr" : awayteam.css('td.qbr::text').get(),
-                                "rtg" : awayteam.css('td.rtg::text').get(),
-                                "rush car" : awayteam.css('td.car::text').get(),
-                                "rush yds" : awayteam.css('td.yds::text').get(),
-                                "rush long" : awayteam.css('td.long::text').get()
-                            }
-                
-            for hometeam in game.css('div.col.column-two.gamepackage-away-wrap'):
-                for player in hometeam.css('td.name'):
-                    player_name = player.css('span.abbr::text').get()
-                    if player_name is not None:
-                        yield{
-                            "game_id" : split[7],
-                            "team" : response.css('span.team-name::text').extract()[1],
-                            "player_name" : player.css('td.name > a > span::text').get(),
-                            "player_url" : player.css('td.name > a::attr(href)').get(),
-                            "pass completion" : hometeam.css('td.c-att::text').get(),
-                            "pass yds" : hometeam.css('td.yds::text').get(),
-                            "pass avg" : hometeam.css('td.avg::text').get(),
-                            "pass td" : hometeam.css('td.td::text').get(),
-                            "pass int" : hometeam.css('td.int::text').get(),
-                            "sacks" : hometeam.css('td.sacks::text').get(),
-                            "QB rating" : hometeam.css('td.qbr::text').get(),
-                            "rtg" : hometeam.css('td.rtg::text').get(),
-                            "car" : hometeam.css('td.car::text').get(),
-                            "long" : hometeam.css('td.long::text').get()
-                        }'''
-
-            
