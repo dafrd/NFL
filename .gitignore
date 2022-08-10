@@ -1,4 +1,4 @@
 venv/
-nflscraping/__pycache__/
-nflscraping/spiders/__pycache__/
+nflscraping/nflscraping/__pycache__/
+nflscraping/nflscraping/spiders/__pycache__/
 *.json
