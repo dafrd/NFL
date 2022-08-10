@@ -65,6 +65,8 @@ if filename in os.listdir():
 process = CrawlerProcess(settings = {
     'USER_AGENT': 'Chrome/97.0',
     'LOG_LEVEL': logging.INFO,
+    #'FEED FORMAT' : ,
+    'FEED URI' : '../../json/',
     "FEEDS": {
         filename : {"format": "json"},
     },
