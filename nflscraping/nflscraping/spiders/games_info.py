@@ -6,21 +6,22 @@ import json
 import scrapy
 from scrapy.crawler import CrawlerProcess
 import json
+import pandas as pd
 
 # open file with url
-my_file = open("url_games.txt", "r")
-content = my_file.read()
-content_list = content.split("\n")[:-1]
+print(os.listdir())
+print(os.listdir("nflscraping/spiders/"))
+df = pd.read_json("espn_scores.json")
 
-
-
+list_url = list(df["gamecast"])
+print(list_url)
 class ESPNGamesCastSpider(scrapy.Spider):
 
     name = 'espngamescast'
 
     # Url to start your spider from 
     #example : ['https://www.espn.com/nfl/game/_/gameId/401326129']
-    start_urls = content_list
+    start_urls = list_url
 
     # Callback function that will be called when starting your spider
     
