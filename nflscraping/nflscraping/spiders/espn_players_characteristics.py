@@ -3,23 +3,17 @@ from unicodedata import name
 import json
 import scrapy
 import pandas as pd
+import os
 
 class ESPNPlayersCharacteristicsSpider(scrapy.Spider):
     name = 'espnplayerscharacteristics'
-
+    print(os.listdir())
     def __init__(self):
-        with open('../json/espn_rosters.json', encoding='utf-8') as data_file:
+        with open('./json/players.json', encoding='utf-8') as data_file:
             self.data = json.load(data_file)
 
     def start_requests(self):
-        urls = []
-        for url in self.data:
-            #request = scrapy.Request(players['player_url'], callback=self.parse)
-            #request.meta['game'] = game['boxscore']
-            #yield request
-            urls.append(url['player_url'])
-        urls = list(set(urls))
-        for player in urls:
+        for player in self.data:
             request = scrapy.Request(player, callback=self.parse)
             yield request
 
