@@ -3,11 +3,11 @@ from unicodedata import name
 import json
 import scrapy
 import pandas as pd
-import os
+#import os
 
 class ESPNPlayersCharacteristicsSpider(scrapy.Spider):
     name = 'espnplayerscharacteristics'
-    print(os.listdir())
+    #print(os.listdir())
     def __init__(self):
         with open('./json/players.json', encoding='utf-8') as data_file:
             self.data = json.load(data_file)
@@ -38,4 +38,16 @@ class ESPNPlayersCharacteristicsSpider(scrapy.Spider):
                     "Draft" : response.xpath('//*[@id="fittPageContainer"]/div[2]/div[1]/div/div/div[1]/div[2]/div/ul/li[4]/div[2]/div/text()').get(),
                     "Fantasy Draft Rank" : response.xpath('//*[@id="fittPageContainer"]/div[2]/div[5]/div/div[2]/div[2]/section/div/div[1]/div[1]/div[2]/span/text()').get(),
                     "Fantasy '%' rostered" : response.xpath('//*[@id="fittPageContainer"]/div[2]/div[5]/div/div[2]/div[2]/section/div/div[1]/div[2]/div[2]/span/text()').get()
+                }
+            
+            else :
+                yield
+                {
+                    "id player" : split[7],
+                    "first name" : response.xpath('//*[@id="fittPageContainer"]/div[2]/div[1]/div/div/div[1]/div[1]/div[2]/h1/span[1]/text()').get(),
+                    "last name" : response.xpath('//*[@id="fittPageContainer"]/div[2]/div[1]/div/div/div[1]/div[1]/div[2]/h1/span[2]/text()').get(),
+                    "status" : 'Inactive',
+                    "position" : response.xpath('//*[@id="fittPageContainer"]/div[2]/div[1]/div/div/div[1]/div[1]/div[2]/div/ul/li/text()').get(),
+                    "Birthdate" : response.xpath('//*[@id="fittPageContainer"]/div[2]/div[1]/div/div/div[1]/div[2]/div/ul/li[2]/div[2]/div/text()').get(),
+                    "College" : response.xpath('//*[@id="fittPageContainer"]/div[2]/div[1]/div/div/div[1]/div[2]/div/ul/li[3]/div[2]/div/a/text()').get()
                 }
