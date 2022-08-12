@@ -49,7 +49,7 @@ class ESPNGamesCastSpider(scrapy.Spider):
         
 
 # Name of the file where the results will be saved
-filename = "gamescast.json"
+filename = "gamescast_test.json"
 
 # if th file exist, remove this
 if filename in os.listdir():
